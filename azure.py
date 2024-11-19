@@ -70,6 +70,7 @@ def login() -> jsonify:
     Returns:
         JSON: Authorization URL
     '''
+
     # Generate the redirecting URI (the callback URL)
     #   The port will change depending on the environment (dev/prod)
     redirect_uri = (

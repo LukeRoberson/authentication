@@ -88,6 +88,7 @@ def token_required(f):
 
         # Validate the token
         result = validate_token(token)
+        print(result)
 
         if 'error' in result:
             return jsonify(
@@ -97,6 +98,9 @@ def token_required(f):
                     "details": result['error']
                 }
             ), 401
+
+        # If the token is valid, add to kwargs
+        kwargs['decoded_token'] = result
 
         return f(*args, **kwargs)
     return decorated_function
@@ -110,7 +114,7 @@ def validate_token(
         Client adds the token to the Authorization header
         This function decodes the token, and confirms its validity
 
-    JWKS - KSON Web Keys
+    JWKS - JSON Web Keys
         These are the IDP public keys used to verify the token signature
         When the IDP issues a token, it signs it with its private key
         The client can verify the token with the public key
