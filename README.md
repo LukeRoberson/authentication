@@ -36,11 +36,17 @@ This may be transparent if the user is already logged into their Azure account, 
 
 Azure will access the callback URL, as defined in the config file. It will present an authentication code. If authentication is successful, the token is extracted, and presented to the user.
 
-# API Tokens
+## API Tokens
 
 A decorator called 'token_required' can be added to API URLs. This requires that a Bearer Token is included to authenticate the request.
 
 This will check that the request has a token, and that the token is valid.
+
+## External Services
+
+External services, such as an API, can make use of the authentication service.
+
+POST to /auth/validate with 'token' in the JSON body. The auth service will return decoded token details if the token is valid, or an error if not.
 
 # General Usage
 
